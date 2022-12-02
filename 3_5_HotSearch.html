@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+   maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, viewport-fit=cover">
+    <script src="./fondz/iconfont.js"></script><!-- 第一步：引入项目下面生成的 symbol 代码： -->
+    <link rel="stylesheet" href="./css/pub.css"><!-- 引入全局css -->
+    <title>超话页面</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #head {
+            width: 100%;
+        }
+
+        #head img {
+            width: 100%;
+        }
+
+        /*********************返回****************************/
+        #Goback {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #fff;
+            font-weight: bold;
+        }
+
+        #Goback .wbHote {
+            display: inline-block;
+            text-align: center;
+        }
+
+        #Goback2 {
+            position: fixed;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+
+        }
+
+        /******************************上导航*****************************/
+        #fixed {
+            top: 20px;
+        }
+
+        #fixed .top {
+
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 15px;
+            background-color: #fff;
+
+        }
+
+        #fixed p {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #fixed li {
+            width: 60px;
+            /* width: 16.6%; */
+            text-align: center;
+        }
+
+        /* <!-- *********************搜索内容***************************** --> */
+        .update {
+            margin: 5px 0 5px;
+            font-size: 10px;
+            background-color: #eee;
+        }
+        #main .search .number{
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 0px 10px 0px;
+            color: rgb(247, 70, 70);
+        }
+        #main .search li{
+            padding: 5px 60px 0px 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #main .search .henxian{
+            width: 100%;
+            border-top: 2px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="Goback">
+        <a href="./3_Found_page.html">
+            &lt;返回 </a>
+                <div class="wbHote">微博热搜</div>
+    </div>
+    <div id="Goback2">
+        <a href="./3_Found_page.html">
+            &lt;返回 </a>
+    </div>
+    <div id="head">
+        <!-- <img src="./img/HotSearch/wbHotSearch.jpg" alt=""> -->
+        <!-- <img src="https://pic2.58cdn.com.cn/nowater/webim/big/n_v268cc852f2fde46659cea96f41d313581.jpg" alt="wbHotSearch.jpg" title="wbHotSearch.jpg" /> -->
+        <!-- 使用即时图床 -->
+        <img src="http://ltx-image.test.upcdn.net/202212021459610.jpg"/>
+        <!-- 图床地址：https://console.upyun.com/services/ltx-image/domainsFile/ -->
+    </div>
+    <!-- *********************上导航***************************** -->
+    <div id="fixed">
+        <ul class="top">
+            <li>
+                <a href="#">
+                    <div>
+                        <p>推荐</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>热搜</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>文娱</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>要闻</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>视频</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div>
+                        <p>同城</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- *********************搜索内容***************************** -->
+    <div class="update">实时热点，每十分钟更新一次</div>
+    <div id="main">
+        <ul class="search">
+            <!-- 
+            <li>
+                <a href="${v.link}">${v.title}</a>
+            </li>
+            <li class="henxian"></li 
+            -->
+        </ul>
+    </div>
+    <!-- ***************************JavaScript**************************** -->
+    <script>
+        window.onscroll = function () {
+            var st = document.documentElement.scrollTop;//滚上去就会触发的值
+            console.log(st);
+            if (st > head.offsetHeight) {
+                fixed.style.position = "fixed";//元素滚着滚着变固定
+                Goback.style.display = "block";//出现
+                Goback2.style.display = "none";//隐藏
+            }
+            else {
+                fixed.style.position = "static";//元素滚回去恢复默认
+                Goback.style.display = "none";//隐藏
+                Goback2.style.display = "block";//出现
+            }
+        }
+
+        var url = "http://rap2api.taobao.org/app/mock/308020/0810"
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", url, true);//get请求，url说明是yrl,true是异步
+        xhr.send();
+
+        xhr.onreadystatechange = function () {//监听成功
+            if (xhr.readyState === 4 && xhr.status === 200) {//状态码为200
+                console.log(xhr.responseText);
+                var jarr = JSON.parse(xhr.responseText);
+                //从服务器端获得数据在网页显示 JSON.parse()服务器端数据变成json
+                insert(jarr);//insert这个名字是自己起名的
+            }
+        }
+        function insert(jarr) {
+            var alist = document.querySelector(".search");//获取上面的class
+            jarr.forEach((v, i) => {
+                var nli = document.createElement("li");//创建一个元素
+                nli.innerHTML = `
+            <li>
+                <dev class="number">${v.number}</dev>
+                <a href="${v.link}">${v.title}</a>
+            </li>
+            <li class="henxian"></li>`;
+                alist.appendChild(nli);//末尾加一个li
+            });
+        }
+    </script>
+</body>
+</html>
